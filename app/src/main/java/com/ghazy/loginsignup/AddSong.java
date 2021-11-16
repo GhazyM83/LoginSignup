@@ -45,6 +45,7 @@ public class AddSong extends AppCompatActivity {
         etDate = findViewById(R.id.etDateAddSong);
         spCategory = findViewById(R.id.spCategoryAddSong);
         ivCover = findViewById(R.id.ivCoverAddSong);
+        fbs = FirebaseServices.getInstance();
         spCategory.setAdapter(new ArrayAdapter<songCategory>(this, android.R.layout.simple_list_item_1, songCategory.values()));
     }
 
@@ -66,9 +67,9 @@ public class AddSong extends AppCompatActivity {
             return;
         }
 
-        Song rest = new Song(name, artist, album, songCategory.valueOf(category), date);
-        fbs.getFire().collection("restaurants")
-                .add(rest)
+        Song song = new Song(name, artist, album, songCategory.valueOf(category), date);
+        fbs.getFire().collection("songs")
+                .add(song)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
