@@ -7,7 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.nfc.Tag;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -61,8 +60,7 @@ public class AddSong extends AppCompatActivity {
         else photo = ivCover.getDrawable().toString();
 
         if (name.trim().isEmpty() || artist.trim().isEmpty() || album.trim().isEmpty() ||
-                date.trim().isEmpty() || category.trim().isEmpty() || photo.trim().isEmpty())
-        {
+                date.trim().isEmpty() || category.trim().isEmpty() || photo.trim().isEmpty()) {
             Toast.makeText(this, "Some fields are empty!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -73,7 +71,7 @@ public class AddSong extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Log.d(TAG, "Document added" + documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -95,13 +93,10 @@ public class AddSong extends AppCompatActivity {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
             }
         });
     }
