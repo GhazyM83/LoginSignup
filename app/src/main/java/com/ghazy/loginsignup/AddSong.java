@@ -64,7 +64,8 @@ public class AddSong extends AppCompatActivity {
         category = spCategory.getSelectedItem().toString();
         if (ivCover.getDrawable() == null)
             photo = "no_image";
-        else photo = ivCover.getDrawable().toString();
+        else photo = storageReference.toString();
+        
 
         if (name.trim().isEmpty() || artist.trim().isEmpty() || album.trim().isEmpty() ||
                 date.trim().isEmpty() || category.trim().isEmpty() || photo.trim().isEmpty()) {
@@ -72,7 +73,7 @@ public class AddSong extends AppCompatActivity {
             return;
         }
 
-        Song song = new Song(name, artist, album, songCategory.valueOf(category), date);
+        Song song = new Song(name, artist, album, songCategory.valueOf(category), date, photo);
         fbs.getFire().collection("songs")
                 .add(song)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
