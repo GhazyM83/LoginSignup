@@ -43,12 +43,11 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
-                            // TODO: commands if successful
+                            Toast.makeText(getApplicationContext(), "Account created successfully!", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(i);
                         } else {
-
-                            // TODO: commands if failed
-                            Toast.makeText(SignUpActivity.this, "Username or password is empty!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpActivity.this, "Failed to create a new account!", Toast.LENGTH_LONG).show();
                             return;
                         }
                     }

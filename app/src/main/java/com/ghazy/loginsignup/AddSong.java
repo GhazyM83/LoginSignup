@@ -39,6 +39,7 @@ public class AddSong extends AppCompatActivity {
     private FirebaseServices fbs;
     private Uri filePath;
     private StorageReference storageReference;
+    private String StorageCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class AddSong extends AppCompatActivity {
         spCategory = findViewById(R.id.spCategoryAddSong);
         ivCover = findViewById(R.id.ivCoverAddSong);
         fbs = FirebaseServices.getInstance();
+        StorageCode = "images/" + UUID.randomUUID().toString();
         spCategory.setAdapter(new ArrayAdapter<songCategory>(this, android.R.layout.simple_list_item_1, songCategory.values()));
         storageReference = fbs.getStorage().getReference();
     }
@@ -64,7 +66,7 @@ public class AddSong extends AppCompatActivity {
         category = spCategory.getSelectedItem().toString();
         if (ivCover.getDrawable() == null)
             photo = "no_image";
-        else photo = storageReference.toString();
+        else photo = StorageCode;
         
 
         if (name.trim().isEmpty() || artist.trim().isEmpty() || album.trim().isEmpty() ||
@@ -95,24 +97,17 @@ public class AddSong extends AppCompatActivity {
         if (filePath != null) {
 
             // Code for showing progressDialog while uploading
-            ProgressDialog progressDialog
-                    = new ProgressDialog(this);
+            ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
             // Defining the child of storageReference
-            StorageReference ref
-                    = storageReference
-                    .child(
-                            "images/"
-                                    + UUID.randomUUID().toString());
+            StorageReference ref = storageReference.child(StorageCode);
 
             // adding listeners on upload
             // or failure of image
-            ref.putFile(filePath)
-                    .addOnSuccessListener(
+            ref.putFile(filePath).addOnSuccessListener(
                             new OnSuccessListener<UploadTask.TaskSnapshot>() {
-
                                 @Override
                                 public void onSuccess(
                                         UploadTask.TaskSnapshot taskSnapshot)
@@ -121,11 +116,7 @@ public class AddSong extends AppCompatActivity {
                                     // Image uploaded successfully
                                     // Dismiss dialog
                                     progressDialog.dismiss();
-                                    Toast
-                                            .makeText(getApplicationContext(),
-                                                    "Image Uploaded!!",
-                                                    Toast.LENGTH_SHORT)
-                                            .show();
+                                    Toast.makeText(getApplicationContext(), "Image Uploaded!!", Toast.LENGTH_SHORT).show();
                                 }
                             })
 
@@ -136,11 +127,7 @@ public class AddSong extends AppCompatActivity {
 
                             // Error, Image not uploaded
                             progressDialog.dismiss();
-                            Toast
-                                    .makeText(getApplicationContext(),
-                                            "Failed " + e.getMessage(),
-                                            Toast.LENGTH_SHORT)
-                                    .show();
+                            Toast.makeText(getApplicationContext(), "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(
@@ -152,13 +139,8 @@ public class AddSong extends AppCompatActivity {
                                 public void onProgress(
                                         UploadTask.TaskSnapshot taskSnapshot)
                                 {
-                                    double progress
-                                            = (100.0
-                                            * taskSnapshot.getBytesTransferred()
-                                            / taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage(
-                                            "Uploaded "
-                                                    + (int)progress + "%");
+                                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                                    progressDialog.setMessage("Uploaded " + (int)progress + "%");
                                 }
                             });
         }

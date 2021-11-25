@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
 
         etUsername = findViewById(R.id.etUsernameMain);
         etPassword = findViewById(R.id.etPasswordMain);
@@ -52,9 +53,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // TODO: commands if successfull
+                            Toast.makeText(getApplicationContext(), "Tag", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getApplicationContext(), LogInSuccess.class);
+                            startActivity(i);
                         } else {
-                            // TODO: commands if failed
                             Toast.makeText(MainActivity.this, "Username or password is empty!", Toast.LENGTH_SHORT).show();
                             return;
                         }
