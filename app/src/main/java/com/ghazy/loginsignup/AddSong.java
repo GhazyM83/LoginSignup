@@ -41,6 +41,7 @@ public class AddSong extends AppCompatActivity {
     private StorageReference storageReference;
     private String StorageCode;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +68,7 @@ public class AddSong extends AppCompatActivity {
         if (ivCover.getDrawable() == null)
             photo = "no_image";
         else photo = StorageCode;
-        
+
 
         if (name.trim().isEmpty() || artist.trim().isEmpty() || album.trim().isEmpty() ||
                 date.trim().isEmpty() || category.trim().isEmpty() || photo.trim().isEmpty()) {
