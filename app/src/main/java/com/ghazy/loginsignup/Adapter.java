@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
@@ -20,7 +21,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private Adapter.ItemClickListener mClickListener;
     ImageView ivPhoto;
     private FirebaseServices fbs;
-    StorageReference ref = fbs.getStorage().getReference().child("images/");
 
     // data is passed into the constructor
     Adapter(Context context, List<Song> data) {
@@ -38,10 +38,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        fbs = FirebaseServices.getInstance();
+        StorageReference ref = fbs.getStorage().getReference().child("images/");
         Song song = mData.get(position);
         holder.tvName.setText(song.getSongName());
-        //holder.ivPhoto.setImageBitmap(fbs.getStorage(song.getSongCover());
-        Glide.with(this.ivPhoto).using(new FirebaseImageLoader()).load(ref).into(ivPhoto);
+        //Glide.with(Adapter.class)
     }
 
     // total number of rows
