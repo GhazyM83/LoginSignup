@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
@@ -19,7 +20,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private List<Song> mData;
     private LayoutInflater mInflater;
     private Adapter.ItemClickListener mClickListener;
-    ImageView ivPhoto;
     private FirebaseServices fbs;
 
     // data is passed into the constructor
@@ -39,10 +39,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         fbs = FirebaseServices.getInstance();
-        StorageReference ref = fbs.getStorage().getReference().child("images/");
         Song song = mData.get(position);
         holder.tvName.setText(song.getSongName());
-        //Glide.with(Adapter.class)
+        StorageReference gsReference = fbs.getStorage().getReferenceFromUrl("gs://bucket/images/stars.jpg");
+        //GlideApp.with(context).load(gsReference).into(imageView);
     }
 
     // total number of rows
@@ -55,11 +55,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvName;
+        ImageView ivPhoto;
 
         ViewHolder(View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvNameAllSongs);
-            ivPhoto = itemView.findViewById(R.id.tvNameAllSongs);
+            ivPhoto = itemView.findViewById(R.id.ivPhotoAllSongs);
             itemView.setOnClickListener(this);
         }
 

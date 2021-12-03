@@ -35,8 +35,6 @@ public class AllSongs extends AppCompatActivity {
         readData();
     }
 
-
-
     private void readData() {
         fbs.getFire().collection("songs")
                 .get()
