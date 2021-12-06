@@ -20,6 +20,7 @@ public class Utilities {
     public Utilities()
     {
     }
+
     public static Utilities getInstance()
     {
         if (instance == null)

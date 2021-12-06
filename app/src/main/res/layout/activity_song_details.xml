@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SongDetails">
+
+    <ImageView
+        android:id="@+id/ivCoverSongDetails"
+        android:layout_width="170dp"
+        android:layout_height="148dp"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        tools:layout_editor_absoluteX="120dp"
+        tools:layout_editor_absoluteY="419dp" />
+
+    <TextView
+        android:id="@+id/tvCategorySongDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Song Category"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="139dp"
+        tools:layout_editor_absoluteY="281dp" />
+
+    <TextView
+        android:id="@+id/tvNameSongDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Song Name"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="83dp" />
+
+    <TextView
+        android:id="@+id/tvArtistSongDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Artist Name"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="151dp"
+        tools:layout_editor_absoluteY="151dp" />
+
+    <TextView
+        android:id="@+id/tvAlbumSongDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Album Name"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="147dp"
+        tools:layout_editor_absoluteY="216dp" />
+
+    <TextView
+        android:id="@+id/tvLengthSongDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Song Length"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="352dp" />
+
+    <TextView
+        android:id="@+id/tvDateSongDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Release Date"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="147dp"
+        tools:layout_editor_absoluteY="599dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

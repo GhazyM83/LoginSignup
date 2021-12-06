@@ -1,7 +1,6 @@
 package com.ghazy.loginsignup;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -21,11 +19,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private LayoutInflater mInflater;
     private Adapter.ItemClickListener mClickListener;
     private FirebaseServices fbs;
+    private Context context;
 
     // data is passed into the constructor
     Adapter(Context context, List<Song> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        this.context = context;
     }
 
     // inflates the row layout from xml when needed
@@ -41,8 +41,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         fbs = FirebaseServices.getInstance();
         Song song = mData.get(position);
         holder.tvName.setText(song.getSongName());
-        StorageReference gsReference = fbs.getStorage().getReferenceFromUrl("gs://bucket/images/stars.jpg");
-        //GlideApp.with(context).load(gsReference).into(imageView);
+        //Glide.with(context).load("gs://loginsignupapp-3ecac.appspot.com/" + song.getSongCover()).into(holder.ivPhoto);
     }
 
     // total number of rows
